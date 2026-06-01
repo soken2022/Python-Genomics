@@ -1,1244 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. [Your Name] — Genomics Scientist</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dr. Reza Sotoudeh | Bioinformatics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --teal: #00b4a6;
+      --teal-dark: #007a70;
+      --teal-light: #00d4c4;
+      --bg: #0a0f0e;
+      --bg2: #111918;
+      --bg3: #162220;
+      --text: #e0f0ee;
+      --muted: #7ab8b2;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* DNA background */
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(0,180,166,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0,212,196,0.05) 0%, transparent 50%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10,15,14,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,180,166,0.2);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+    }
+    .nav-logo { color: var(--teal); font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--teal-light); }
+
+<!-- Replace your existing hero section entirely with this -->
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink: #0e1117;
-    --paper: #f6f3ee;
-    --cream: #ede9e0;
-    --gold: #b8965a;
-    --gold-light: #d4b07a;
-    --sage: #4a6358;
-    --sage-light: #6b8f7e;
-    --muted: #6b6459;
-    --rule: rgba(184,150,90,0.25);
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --mono: 'DM Mono', monospace;
-    --sans: 'Jost', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-weight: 300;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── NOISE TEXTURE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
-
-  /* ── NAVIGATION ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 4rem;
-    background: rgba(246,243,238,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--gold); }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-
-  /* ── HERO ── */
-  #hero {
+  /* HERO OVERRIDES */
+  .hero {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10rem 4rem 6rem 4rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.2s forwards;
-  }
-
-  .hero-name {
-    font-family: var(--serif);
-    font-size: clamp(3.5rem, 5vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.35s forwards;
-  }
-
-  .hero-name em {
-    font-style: italic;
-    color: var(--sage);
-  }
-
-  .hero-title {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--gold);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.5s forwards;
-  }
-
-  .hero-desc {
-    font-size: 0.95rem;
-    color: var(--muted);
-    max-width: 420px;
-    line-height: 1.8;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.65s forwards;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.8s forwards;
-  }
-
-  .btn-primary {
-    padding: 0.85rem 2rem;
-    background: var(--sage);
-    color: var(--paper);
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.2s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
-
-  .btn-outline {
-    padding: 0.85rem 2rem;
-    background: transparent;
-    color: var(--sage);
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    border: 1px solid var(--sage);
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s;
-    display: inline-block;
-  }
-  .btn-outline:hover { background: var(--sage); color: var(--paper); transform: translateY(-2px); }
-
-  .hero-right {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  /* DNA Helix SVG animation */
-  .dna-container {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeIn 1.2s 0.5s forwards;
-  }
-
-  .dna-bg {
-    position: absolute;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(74,99,88,0.08) 0%, transparent 70%);
-  }
-
-  .dna-svg { width: 220px; animation: float 6s ease-in-out infinite; }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-18px); }
-  }
-
-  .hero-stats {
-    position: absolute;
-    bottom: 4rem;
-    right: 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s 1s forwards;
-  }
-
-  .stat {
-    text-align: right;
-    border-right: 2px solid var(--gold);
-    padding-right: 1rem;
-  }
-
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 0.2rem;
-  }
-
-  /* ── SECTION BASE ── */
-  section { padding: 7rem 4rem; }
-
-  .section-tag {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-  }
-
-  .section-title em { font-style: italic; color: var(--sage); }
-
-  .divider {
-    width: 60px;
-    height: 1px;
-    background: var(--gold);
-    margin-bottom: 3rem;
-  }
-
-  /* ── ABOUT / EDUCATION ── */
-  #education {
-    background: var(--cream);
-    position: relative;
-    overflow: hidden;
-  }
-
-  #education::before {
-    content: 'GENOMICS';
-    position: absolute;
-    right: -2rem;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg);
-    font-family: var(--serif);
-    font-size: 8rem;
-    font-weight: 300;
-    color: rgba(184,150,90,0.06);
-    letter-spacing: 0.3em;
-    white-space: nowrap;
-    pointer-events: none;
-  }
-
-  .edu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 5rem;
-    align-items: start;
-    max-width: 1100px;
-  }
-
-  .edu-text p {
-    font-size: 0.95rem;
-    color: var(--muted);
-    line-height: 1.9;
-    margin-bottom: 1.2rem;
-  }
-
-  .timeline { position: relative; padding-left: 1.5rem; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .timeline-item:last-child { border-bottom: none; margin-bottom: 0; }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -1.75rem;
-    top: 0.4rem;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 2px solid var(--paper);
-  }
-
-  .timeline-year {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    color: var(--gold);
-    margin-bottom: 0.4rem;
-  }
-
-  .timeline-degree {
-    font-family: var(--serif);
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.25rem;
-  }
-
-  .timeline-inst {
-    font-size: 0.82rem;
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  /* ── RESEARCH ── */
-  #research { background: var(--paper); }
-
-  .research-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 1rem;
-  }
-
-  .research-card {
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    padding: 2.2rem;
-    position: relative;
-    transition: transform 0.3s, box-shadow 0.3s;
-    overflow: hidden;
-  }
-
-  .research-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--gold), var(--sage));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s;
-  }
-
-  .research-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(14,17,23,0.08); }
-  .research-card:hover::before { transform: scaleX(1); }
-
-  .card-icon {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .card-icon::before {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .card-title {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.3;
-    margin-bottom: 0.9rem;
-  }
-
-  .card-text {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .card-year {
-    margin-top: 1.5rem;
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--sage-light);
-    letter-spacing: 0.1em;
-  }
-
-  /* ── ANNOTATION / ANALYSIS ── */
-  #analysis {
-    background: var(--ink);
-    color: var(--paper);
-    position: relative;
-    overflow: hidden;
-  }
-
-  #analysis::after {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(74,99,88,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  #analysis .section-tag { color: var(--gold-light); }
-  #analysis .section-title { color: var(--paper); }
-  #analysis .divider { background: var(--gold-light); }
-
-  .analysis-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .analysis-text p {
-    font-size: 0.92rem;
-    color: rgba(246,243,238,0.65);
-    line-height: 1.9;
-    margin-bottom: 1rem;
-  }
-
-  .feature-list {
-    list-style: none;
-    margin-top: 1.5rem;
-  }
-  .feature-list li {
     display: flex;
     align-items: flex-start;
-    gap: 0.9rem;
-    padding: 0.85rem 0;
-    border-bottom: 1px solid rgba(184,150,90,0.15);
-    font-size: 0.88rem;
-    color: rgba(246,243,238,0.7);
-  }
-  .feature-list li::before {
-    content: '→';
-    color: var(--gold-light);
-    font-family: var(--mono);
-    flex-shrink: 0;
-    margin-top: 0.05rem;
-  }
-
-  .terminal {
-    background: #0a0d12;
-    border: 1px solid rgba(184,150,90,0.2);
-    border-radius: 4px;
-    overflow: hidden;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-  }
-
-  .terminal-header {
-    background: rgba(184,150,90,0.1);
-    padding: 0.6rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-bottom: 1px solid rgba(184,150,90,0.15);
-  }
-
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dot-r { background: #e06c75; }
-  .dot-y { background: #e5c07b; }
-  .dot-g { background: #98c379; }
-
-  .terminal-title {
-    margin-left: 0.5rem;
-    font-size: 0.65rem;
-    color: rgba(246,243,238,0.3);
-    letter-spacing: 0.1em;
-  }
-
-  .terminal-body {
-    padding: 1.5rem;
-    line-height: 2;
-  }
-
-  .t-prompt { color: var(--sage-light); }
-  .t-cmd { color: var(--paper); }
-  .t-out { color: rgba(246,243,238,0.45); }
-  .t-green { color: #98c379; }
-  .t-gold { color: var(--gold-light); }
-  .t-blue { color: #61afef; }
-  .cursor {
-    display: inline-block;
-    width: 8px;
-    height: 14px;
-    background: var(--gold-light);
-    vertical-align: text-bottom;
-    animation: blink 1.1s step-end infinite;
-  }
-
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-  /* ── PACKAGES ── */
-  #packages { background: var(--cream); }
-
-  .packages-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .pkg-card {
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    padding: 2.5rem 2rem;
-    display: flex;
-    flex-direction: column;
+    padding: 5rem 2rem 4rem;
     position: relative;
-    transition: all 0.3s;
+    z-index: 1;
+    overflow: hidden;
   }
 
-  .pkg-card.featured {
-    background: var(--sage);
-    border-color: var(--sage);
-    color: var(--paper);
-    transform: scale(1.03);
-  }
-
-  .pkg-card:hover:not(.featured) { border-color: var(--gold); transform: translateY(-4px); }
-
-  .pkg-badge {
+  #nanopore-canvas {
     position: absolute;
-    top: -1px;
-    right: 1.5rem;
-    background: var(--gold);
-    color: var(--ink);
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.75rem;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
   }
 
-  .pkg-name {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-  }
-
-  .pkg-card.featured .pkg-name { color: var(--paper); }
-
-  .pkg-subtitle {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-  }
-  .pkg-card.featured .pkg-subtitle { color: rgba(246,243,238,0.6); }
-
-  .pkg-price {
-    font-family: var(--serif);
-    font-size: 2.4rem;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-  .pkg-card.featured .pkg-price { color: var(--paper); }
-
-  .pkg-period {
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-bottom: 2rem;
-  }
-  .pkg-card.featured .pkg-period { color: rgba(246,243,238,0.55); }
-
-  .pkg-features {
-    list-style: none;
-    flex: 1;
-    margin-bottom: 2rem;
-  }
-  .pkg-features li {
-    padding: 0.5rem 0;
-    font-size: 0.84rem;
-    color: var(--muted);
-    border-bottom: 1px solid var(--rule);
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
-    gap: 0.6rem;
-  }
-  .pkg-card.featured .pkg-features li { color: rgba(246,243,238,0.75); border-color: rgba(246,243,238,0.1); }
-  .pkg-features li::before { content: '✓'; color: var(--sage); font-weight: bold; }
-  .pkg-card.featured .pkg-features li::before { color: var(--gold-light); }
-
-  .pkg-btn {
-    display: block;
-    text-align: center;
-    padding: 0.85rem;
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--sage);
-    color: var(--sage);
-    transition: all 0.3s;
-  }
-  .pkg-btn:hover { background: var(--sage); color: var(--paper); }
-  .pkg-card.featured .pkg-btn {
-    background: var(--paper);
-    color: var(--sage);
-    border-color: var(--paper);
-  }
-  .pkg-card.featured .pkg-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
-
-  /* ── NETWORK ── */
-  #network { background: var(--paper); }
-
-  .network-layout {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .network-text p {
-    font-size: 0.92rem;
-    color: var(--muted);
-    line-height: 1.9;
-    margin-bottom: 1.2rem;
-  }
-
-  .scientist-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .scientist-card {
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    padding: 1.2rem;
-    transition: all 0.3s;
-  }
-  .scientist-card:hover { border-color: var(--gold); }
-
-  .sci-name {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.2rem;
-  }
-
-  .sci-role {
-    font-size: 0.72rem;
-    color: var(--gold);
-    font-family: var(--mono);
-    letter-spacing: 0.06em;
-    margin-bottom: 0.3rem;
-  }
-
-  .sci-inst {
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  .connect-form {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .form-field label {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .form-field input,
-  .form-field textarea {
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    padding: 0.75rem 1rem;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.3s;
-    resize: vertical;
-  }
-
-  .form-field input:focus,
-  .form-field textarea:focus { border-color: var(--gold); }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 3rem 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(184,150,90,0.2);
-  }
-
-  .footer-logo {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-weight: 300;
-  }
-  .footer-logo span { color: var(--gold); }
-
-  .footer-links {
-    display: flex;
+    align-items: flex-start;
     gap: 2rem;
-    list-style: none;
+    flex-wrap: nowrap;
+    position: relative;
+    z-index: 2;
+    padding-top: 1rem;
   }
-  .footer-links a {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(246,243,238,0.4);
+
+  .hero-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    border: 2px solid var(--teal);
+    box-shadow: 0 0 24px rgba(0,180,166,0.4);
+    flex-shrink: 0;
+  }
+
+  .hero-text h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;}
+
+  .hero-text h1 span { color: var(--teal); }
+
+  .hero-text .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0.3rem 0 0.8rem;
+  }
+
+  .hero-text p {
+    max-width: 480px;
+    color: #aac8c4;
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.4rem;
+    border-radius: 30px;
+    background: var(--teal);
+    color: #000;
+    font-weight: 600;
+    font-size: 0.85rem;
     text-decoration: none;
-    transition: color 0.3s;
-  }
-  .footer-links a:hover { color: var(--gold); }
-
-  .footer-copy {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: rgba(246,243,238,0.25);
-    letter-spacing: 0.08em;
+    transition: background 0.3s;
   }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* ── SCROLL REVEAL ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 1.2rem 2rem; }
-    #hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 8rem 2rem 4rem; }
-    .hero-stats { position: static; margin-top: 2rem; flex-direction: row; }
-    section { padding: 5rem 2rem; }
-    .edu-grid, .analysis-layout, .network-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .research-grid, .packages-grid { grid-template-columns: 1fr; }
-    .pkg-card.featured { transform: none; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-  }
+  .btn:hover { background: var(--teal-light); }
 </style>
-</head>
-<body>
 
-<!-- NAVIGATION -->
-<nav>
-  <a href="#hero" class="nav-logo">Dr. <span>[Your Name]</span></a>
-  <ul class="nav-links">
-    <li><a href="#education">Education</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#analysis">Analysis</a></li>
-    <li><a href="#packages">Packages</a></li>
-    <li><a href="#network">Network</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-tag">Genomics Scientist &amp; Researcher</div>
-    <h1 class="hero-name">Dr. <em>[Your Name]</em></h1>
-    <div class="hero-title">Genome Annotation &amp; Bioinformatics</div>
-    <p class="hero-desc">
-      Advancing the frontiers of genomics through rigorous research, 
-      computational analysis, and genome annotation. Bridging the gap between 
-      raw sequence data and biological insight.
-    </p>
-    <div class="hero-cta">
-      <a href="#research" class="btn-primary">View Research</a>
-      <a href="#packages" class="btn-outline">Explore Packages</a>
-    </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="dna-container">
-      <div class="dna-bg"></div>
-      <!-- Animated DNA SVG -->
-      <svg class="dna-svg" viewBox="0 0 120 400" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <style>
-            .strand1 { stroke: #b8965a; stroke-width: 2; fill: none; }
-            .strand2 { stroke: #4a6358; stroke-width: 2; fill: none; }
-            .rung    { stroke: rgba(184,150,90,0.35); stroke-width: 1.5; }
-            .node1   { fill: #b8965a; }
-            .node2   { fill: #4a6358; }
-          </style>
-          <animateTransform id="rot" attributeType="XML" attributeName="transform" type="rotate" from="0 60 200" to="360 60 200" dur="20s" repeatCount="indefinite"/>
-        </defs>
-        <!-- Strand 1 (sine wave) -->
-        <path class="strand1" d="
-          M 60 0
-          C 90 20, 90 40, 60 60
-          C 30 80, 30 100, 60 120
-          C 90 140, 90 160, 60 180
-          C 30 200, 30 220, 60 240
-          C 90 260, 90 280, 60 300
-          C 30 320, 30 340, 60 360
-          C 90 380, 90 400, 60 400
-        "/>
-        <!-- Strand 2 (opposite sine wave) -->
-        <path class="strand2" d="
-          M 60 0
-          C 30 20, 30 40, 60 60
-          C 90 80, 90 100, 60 120
-          C 30 140, 30 160, 60 180
-          C 90 200, 90 220, 60 240
-          C 30 260, 30 280, 60 300
-          C 90 320, 90 340, 60 360
-          C 30 380, 30 400, 60 400
-        "/>
-        <!-- Rungs -->
-        <line class="rung" x1="60" y1="30" x2="60" y2="30"/>
-        <line class="rung" x1="38" y1="60" x2="82" y2="60"/>
-        <line class="rung" x1="34" y1="90" x2="86" y2="90"/>
-        <line class="rung" x1="38" y1="120" x2="82" y2="120"/>
-        <line class="rung" x1="60" y1="150" x2="60" y2="150"/>
-        <line class="rung" x1="82" y1="180" x2="38" y2="180"/>
-        <line class="rung" x1="86" y1="210" x2="34" y2="210"/>
-        <line class="rung" x1="82" y1="240" x2="38" y2="240"/>
-        <line class="rung" x1="60" y1="270" x2="60" y2="270"/>
-        <line class="rung" x1="38" y1="300" x2="82" y2="300"/>
-        <line class="rung" x1="34" y1="330" x2="86" y2="330"/>
-        <line class="rung" x1="38" y1="360" x2="82" y2="360"/>
-        <!-- Nodes strand 1 -->
-        <circle class="node1" cx="90" cy="30" r="4"/>
-        <circle class="node1" cx="82" cy="90" r="4"/>
-        <circle class="node1" cx="30" cy="150" r="4"/>
-        <circle class="node1" cx="38" cy="210" r="4"/>
-        <circle class="node1" cx="90" cy="270" r="4"/>
-        <circle class="node1" cx="82" cy="330" r="4"/>
-        <!-- Nodes strand 2 -->
-        <circle class="node2" cx="30" cy="30" r="4"/>
-        <circle class="node2" cx="38" cy="90" r="4"/>
-        <circle class="node2" cx="90" cy="150" r="4"/>
-        <circle class="node2" cx="82" cy="210" r="4"/>
-        <circle class="node2" cx="30" cy="270" r="4"/>
-        <circle class="node2" cx="38" cy="330" r="4"/>
-      </svg>
-    </div>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">12+</div>
-      <div class="stat-label">Years Research</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">34</div>
-      <div class="stat-label">Publications</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">8K+</div>
-      <div class="stat-label">Genomes Annotated</div>
+<section class="hero">
+  <canvas id="nanopore-canvas"></canvas>
+  <div class="hero-inner">
+    <img src="profile.jpg" alt="Dr. Reza Sotoudeh" class="hero-photo"/>
+    <div class="hero-text">
+      <h1>Dr. <span>Reza Sotoudeh</span></h1>
+      <p class="subtitle">PhD Candidate · Biophysics & Bioinformatics · Tarbiat Modares University</p>
+      <p>Specializing in genome integrity, Chargaff's second parity rule, NGS data analysis, and mRNA vaccine design.</p>
+      <a href="#research" class="btn">View Research</a>
     </div>
   </div>
 </section>
 
-<!-- EDUCATION -->
-<section id="education">
-  <div class="edu-grid reveal">
-    <div>
-      <div class="section-tag">Background</div>
-      <h2 class="section-title">Education &amp; <em>Expertise</em></h2>
-      <div class="divider"></div>
-      <div class="edu-text">
-        <p>A rigorous academic foundation in molecular biology, bioinformatics, and computational genomics, combined with over a decade of hands-on research experience in genome annotation and analysis pipelines.</p>
-        <p>Specialized training in next-generation sequencing technologies, comparative genomics, and functional annotation of eukaryotic and prokaryotic genomes.</p>
+
+<script>
+(function() {
+  const canvas = document.getElementById('nanopore-canvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Nanopore center position
+  const poreX = () => canvas.width * 0.62;
+  const poreY = () => canvas.height * 0.52;
+  const poreRX = 38, poreRY = 70;
+
+  // DNA bases colors
+  const baseColors = {
+    A: '#00e5d4', T: '#00b4a6',
+    G: '#00ffd0', C: '#007a70'
+  };
+  const bases = ['A', 'T', 'G', 'C'];
+
+  // Generate a long DNA sequence
+  const seq = Array.from({length: 120}, () => bases[Math.floor(Math.random()*4)]);
+
+  let offset = 0; // animation scroll offset
+
+  function drawPore(px, py) {
+    // Outer glow ring
+    const grad = ctx.createRadialGradient(px, py, poreRY * 0.3, px, py, poreRY * 2.2);
+    grad.addColorStop(0, 'rgba(0,180,166,0.18)');
+    grad.addColorStop(0.5, 'rgba(0,180,166,0.07)');
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.beginPath();
+    ctx.ellipse(px, py, poreRX * 2.5, poreRY * 2.2, 0, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Pore body (dark oval)
+    ctx.beginPath();
+    ctx.ellipse(px, py, poreRX, poreRY, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#050a09';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0,180,166,0.7)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Inner shimmer
+    const inner = ctx.createRadialGradient(px, py - 10, 4, px, py, poreRX * 0.9);
+    inner.addColorStop(0, 'rgba(0,212,196,0.12)');
+    inner.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.beginPath();
+    ctx.ellipse(px, py, poreRX * 0.85, poreRY * 0.85, 0, 0, Math.PI * 2);
+    ctx.fillStyle = inner;
+    ctx.fill();
+  }
+
+  function drawDNA(px, py) {
+    const spacing = 22;       // vertical distance between base pairs
+    const amplitude = 28;     // helix width
+    const totalBases = 18;    // visible bases
+    const startY = py - (totalBases / 2) * spacing;
+
+    for (let i = 0; i < totalBases; i++) {
+      const y = startY + i * spacing + (offset % spacing);
+      const t = (y - py) / (totalBases * spacing / 2);
+      const phase = (i + offset / spacing) * 0.55;
+
+      const x1 = px + Math.sin(phase) * amplitude;
+      const x2 = px - Math.sin(phase) * amplitude;
+
+      const seqIdx = (i + Math.floor(offset / spacing)) % seq.length;
+      const base1 = seq[seqIdx];
+      const base2 = base1 === 'A' ? 'T' : base1 === 'T' ? 'A' : base1 === 'G' ? 'C' : 'G';
+
+      // Fade out near pore edges
+      const distFromCenter = Math.abs(y - py);
+      const alpha = distFromCenter < poreRY
+        ? Math.max(0, 1 - (distFromCenter / poreRY) * 0.5)
+        : Math.max(0, 1 - ((distFromCenter - poreRY) / (poreRY * 1.5)));
+
+      if (alpha < 0.02) continue;
+
+      // Backbone strand 1
+      if (i < totalBases - 1) {
+        const nextPhase = (i + 1 + offset / spacing) * 0.55;
+        const nx1 = px + Math.sin(nextPhase) * amplitude;
+        const nx2 = px - Math.sin(nextPhase) * amplitude;
+        const ny = y + spacing;
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y);
+        ctx.lineTo(nx1, ny);
+        ctx.strokeStyle = `rgba(0,180,166,${alpha * 0.6})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(x2, y);
+        ctx.lineTo(nx2, ny);
+        ctx.strokeStyle = `rgba(0,120,110,${alpha * 0.6})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      // Base pair bridge
+      ctx.beginPath();
+      ctx.moveTo(x1, y);
+      ctx.lineTo(x2, y);
+      ctx.strokeStyle = `rgba(0,212,196,${alpha * 0.35})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Base nodes
+      ctx.beginPath();
+      ctx.arc(x1, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${hexToRgb(baseColors[base1])},${alpha})`;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(x2, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${hexToRgb(baseColors[base2])},${alpha})`;
+      ctx.fill();
+
+      // Base labels
+      if (alpha > 0.5) {
+        ctx.font = `bold 9px monospace`;
+        ctx.fillStyle = `rgba(0,255,220,${alpha * 0.9})`;
+        ctx.textAlign = 'center';
+        ctx.fillText(base1, x1, y + 3);
+        ctx.fillStyle = `rgba(0,200,180,${alpha * 0.9})`;
+        ctx.fillText(base2, x2, y + 3);
+      }
+    }
+  }
+
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `${r},${g},${b}`;
+  }
+
+  function drawParticles(px, py) {
+    // Floating nucleotide particles in background
+    const t = Date.now() * 0.001;
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2 + t * 0.2;
+      const r = 120 + Math.sin(t + i) * 30;
+      const x = px + Math.cos(angle) * r * 2.5;
+      const y = py + Math.sin(angle) * r;
+      const base = bases[i % 4];
+      ctx.font = '11px monospace';
+      ctx.fillStyle = `rgba(0,180,166,${0.1 + Math.sin(t + i) * 0.05})`;
+      ctx.textAlign = 'center';
+      ctx.fillText(base, x, y);
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const px = poreX(), py = poreY();
+
+    drawParticles(px, py);
+
+    // Draw DNA behind pore
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, canvas.width, canvas.height);
+    ctx.clip();
+    drawDNA(px, py);
+    ctx.restore();
+
+    drawPore(px, py);
+
+    // Clip DNA inside pore to show threading effect
+    ctx.save();
+    ctx.beginPath();
+    ctx.ellipse(px, py, poreRX - 3, poreRY - 3, 0, 0, Math.PI * 2);
+    ctx.clip();
+    drawDNA(px, py);
+    ctx.restore();
+
+    offset += 0.4; // sequencing speed
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+</script>
+
+
+
+
+
+<div class="dna-divider">— A T G C A T G C —</div>
+
+
+
+  <style>
+    section { padding: 5rem 2rem; position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    h2.section-title {
+      font-size: 1.8rem; color: var(--teal); margin-bottom: 2rem;
+      border-left: 4px solid var(--teal); padding-left: 1rem;
+    }
+
+    /* ABOUT */
+    #about { background: var(--bg2); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .about-card {
+      background: var(--bg3); border-radius: 12px; padding: 1.5rem;
+      border: 1px solid rgba(0,180,166,0.15);
+    }
+    .about-card h3 { color: var(--teal-light); margin-bottom: 0.8rem; font-size: 1rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .tag {
+      background: rgba(0,180,166,0.1); color: var(--teal-light);
+      border: 1px solid rgba(0,180,166,0.3); border-radius: 20px;
+      padding: 0.2rem 0.8rem; font-size: 0.8rem;
+    }
+
+    /* RESEARCH */
+    #research { background: var(--bg); }
+    .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .research-card {
+      background: var(--bg3); border-radius: 12px; padding: 1.5rem;
+      border: 1px solid rgba(0,180,166,0.15);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .research-card:hover { border-color: var(--teal); transform: translateY(-4px); }
+    .research-card .icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .research-card h3 { color: var(--teal-light); margin-bottom: 0.5rem; font-size: 1rem; }
+    .research-card p { color: #8ab0aa; font-size: 0.88rem; }
+
+    /* EDUCATION */
+    #education { background: var(--bg2); }
+    .timeline { border-left: 2px solid var(--teal-dark); padding-left: 2rem; }
+    .timeline-item { margin-bottom: 2rem; position: relative; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -2.45rem; top: 0.4rem;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--teal); border: 2px solid var(--bg2);
+    }
+    .timeline-item .year { color: var(--teal); font-size: 0.85rem; font-weight: 600; }
+    .timeline-item h3 { color: #fff; margin: 0.2rem 0; }
+    .timeline-item p { color: var(--muted); font-size: 0.9rem; }
+  </style>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>🔬 Research Interests</h3>
+        <div class="tag-list">
+          <span class="tag">Genome Integrity</span>
+          <span class="tag">Chargaff's 2nd Rule</span>
+          <span class="tag">NGS Analysis</span>
+          <span class="tag">mRNA Vaccine Design</span>
+          <span class="tag">Repeat Elements</span>
+          <span class="tag">Comparative Genomics</span>
+          <span class="tag">Genome Annotation</span>
+        </div>
       </div>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-year">20XX – Present</div>
-        <div class="timeline-degree">Postdoctoral Researcher</div>
-        <div class="timeline-inst">[Your Institution] — Genomics &amp; Bioinformatics Lab</div>
+      <div class="about-card">
+        <h3>💻 Technical Skills</h3>
+        <div class="tag-list">
+          <span class="tag">Python</span>
+          <span class="tag">R</span>
+          <span class="tag">Linux</span>
+          <span class="tag">RepeatMasker</span>
+          <span class="tag">NGS Pipelines</span>
+          <span class="tag">Structural Genomics</span>
+          <span class="tag">Bioinformatics</span>
+        </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-year">20XX – 20XX</div>
-        <div class="timeline-degree">Ph.D. — Computational Genomics</div>
-        <div class="timeline-inst">[Your University] — Department of Molecular Biology</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">20XX – 20XX</div>
-        <div class="timeline-degree">M.Sc. — Bioinformatics</div>
-        <div class="timeline-inst">[Your University]</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">20XX – 20XX</div>
-        <div class="timeline-degree">B.Sc. — Molecular Biology &amp; Genetics</div>
-        <div class="timeline-inst">[Your University]</div>
+      <div class="about-card">
+        <h3>🌍 Languages</h3>
+        <div class="tag-list">
+          <span class="tag">Persian (Native)</span>
+          <span class="tag">Azerbaijani (Native)</span>
+          <span class="tag">English (Working)</span>
+          <span class="tag">Turkish (Working)</span>
+        </div>
+      </div><div class="about-card">
+        <h3>🏆 Awards</h3>
+        <p style="color:#8ab0aa; font-size:0.9rem;">Rank 3 — National PhD Entrance Exam, Iran (2019)</p>
       </div>
     </div>
   </div>
 </section>
+
+<div class="dna-divider">— G C T A G C T A —</div>
 
 <!-- RESEARCH -->
 <section id="research">
-  <div class="reveal">
-    <div class="section-tag">Publications &amp; Work</div>
-    <h2 class="section-title">Latest <em>Research</em></h2>
-    <div class="divider"></div>
-  </div>
-  <div class="research-grid">
-    <div class="research-card reveal">
-      <div class="card-icon">Genomics</div>
-      <h3 class="card-title">Automated Genome Annotation of Novel Eukaryotic Species</h3>
-      <p class="card-text">A comprehensive pipeline for high-throughput structural and functional genome annotation, integrating ab initio prediction with homology-based evidence.</p>
-      <div class="card-year">Journal of Computational Biology · 2024</div>
-    </div>
-    <div class="research-card reveal">
-      <div class="card-icon">Comparative</div>
-      <h3 class="card-title">Pan-Genome Analysis Reveals Adaptive Gene Clusters in Extremophiles</h3>
-      <p class="card-text">Comparative pan-genomic study identifying conserved and variable gene pools across 47 extremophile strains using k-mer clustering approaches.</p>
-      <div class="card-year">Nature Genomics · 2023</div>
-    </div>
-    <div class="research-card reveal">
-      <div class="card-icon">Transcriptomics</div>
-      <h3 class="card-title">Long-read Sequencing for Isoform-resolved Transcriptome Assembly</h3>
-      <p class="card-text">Leveraging Oxford Nanopore and PacBio data to resolve complex alternative splicing events and produce annotation-grade transcript models.</p>
-      <div class="card-year">Genome Research · 2023</div>
-    </div>
-  </div>
-</section>
-
-<!-- ANALYSIS / ANNOTATION -->
-<section id="analysis">
-  <div class="analysis-layout reveal">
-    <div class="analysis-text">
-      <div class="section-tag">Tools &amp; Methods</div>
-      <h2 class="section-title">Genome <em>Analysis</em> &amp; Annotation</h2>
-      <div class="divider"></div>
-      <p>Offering end-to-end genomic analysis services, from raw sequencing data to fully annotated, publication-ready genome assemblies. Built on reproducible, containerized workflows.</p>
-      <ul class="feature-list">
-        <li>Structural genome annotation (gene models, repeat elements, ncRNA)</li>
-        <li>Functional annotation with GO terms, KEGG, and InterPro</li>
-        <li>Comparative genomics and synteny analysis</li>
-        <li>Variant calling and population genomics</li>
-        <li>Custom bioinformatics pipeline development (Snakemake / Nextflow)</li>
-        <li>Quality assessment and BUSCO completeness scoring</li>
-      </ul>
-    </div>
-    <div class="terminal">
-      <div class="terminal-header">
-        <div class="dot dot-r"></div>
-        <div class="dot dot-y"></div>
-        <div class="dot dot-g"></div>
-        <span class="terminal-title">genome_annotation.sh</span>
+  <div class="section-inner">
+    <h2 class="section-title">Research</h2>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="icon">🧬</div>
+        <h3>Genome Integrity & Chargaff's Rule</h3>
+        <p>Investigating strand-specific nucleotide symmetry across viruses, bacteria, archaea, fungi, plants, and animals.</p>
       </div>
-      <div class="terminal-body">
-        <div><span class="t-prompt">$ </span><span class="t-cmd">run_pipeline --genome assembly.fa</span></div>
-        <div class="t-out">&nbsp;</div>
-        <div><span class="t-green">✔ RepeatMasker</span> <span class="t-out">complete [2.3 GB masked]</span></div>
-        <div><span class="t-green">✔ AUGUSTUS</span> <span class="t-out">ab initio prediction done</span></div>
-        <div><span class="t-green">✔ MAKER2</span> <span class="t-out">evidence-based annotation</span></div>
-        <div class="t-out">&nbsp;</div>
-        <div><span class="t-gold">→ Gene models predicted:</span> <span class="t-blue">24,817</span></div>
-        <div><span class="t-gold">→ BUSCO completeness:</span> <span class="t-blue">97.4%</span></div>
-        <div><span class="t-gold">→ Functional annotations:</span> <span class="t-blue">89.2%</span></div>
-        <div class="t-out">&nbsp;</div>
-        <div><span class="t-green">✔ Output:</span> <span class="t-out">genome_annotated.gff3</span></div>
-        <div><span class="t-prompt">$ </span><span class="cursor"></span></div>
+      <div class="research-card">
+        <div class="icon">💉</div>
+        <h3>FMDV mRNA Vaccine Design</h3>
+        <p>Computational design of mRNA vaccine candidates for Foot-and-Mouth Disease Virus using bioinformatics approaches.</p>
+      </div>
+      <div class="research-card">
+        <div class="icon">🔁</div>
+        <h3>Repeat Element Profiling</h3>
+        <p>Automated RepeatMasker-based pipelines for large-scale repeat annotation across diverse genomes.</p>
+      </div>
+      <div class="research-card">
+        <div class="icon">📊</div>
+        <h3>Chromosome Visualization</h3>
+        <p>Novel genome visualization method for anomaly detection — formally acknowledged and recommended for publication.</p>
+      </div>
+      <div class="research-card">
+        <div class="icon">⚙️</div>
+        <h3>Automated Genomic Pipelines</h3>
+        <p>Building scalable pipelines for NGS data processing and large-scale comparative genomics analysis.</p>
+      </div><div class="research-card">
+        <div class="icon">🦠</div>
+        <h3>Comparative Genomics</h3>
+        <p>Cross-kingdom genomic analysis spanning viruses, plasmids, bacteria, archaea, fungi, plants, insects, and humans.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PACKAGES -->
-<section id="packages">
-  <div class="reveal">
-    <div class="section-tag">Services</div>
-    <h2 class="section-title">Analysis <em>Packages</em></h2>
-    <div class="divider"></div>
-  </div>
-  <div class="packages-grid">
-    <div class="pkg-card reveal">
-      <div class="pkg-name">Starter</div>
-      <div class="pkg-subtitle">Basic Annotation</div>
-      <div class="pkg-price">$499</div>
-      <div class="pkg-period">per genome</div>
-      <ul class="pkg-features">
-        <li>Structural annotation</li>
-        <li>Repeat masking</li>
-        <li>BUSCO assessment</li>
-        <li>GFF3 output file</li>
-        <li>1 revision round</li>
-      </ul>
-      <a href="#network" class="pkg-btn">Get Started</a>
-    </div>
+<div class="dna-divider">— T A C G T A C G —</div>
 
-    <div class="pkg-card featured reveal">
-      <div class="pkg-badge">Most Popular</div>
-      <div class="pkg-name">Professional</div>
-      <div class="pkg-subtitle">Full Annotation Suite</div>
-      <div class="pkg-price">$1,299</div>
-      <div class="pkg-period">per genome</div>
-      <ul class="pkg-features">
-        <li>Structural + functional annotation</li>
-        <li>GO, KEGG, InterPro mapping</li>
-        <li>Comparative genomics report</li>
-        <li>Custom pipeline setup</li>
-        <li>3 revision rounds</li>
-        <li>Publication-ready figures</li>
-      </ul>
-      <a href="#network" class="pkg-btn">Get Started</a>
-    </div>
-
-    <div class="pkg-card reveal">
-      <div class="pkg-name">Enterprise</div>
-      <div class="pkg-subtitle">Custom Research</div>
-      <div class="pkg-price">Custom</div>
-      <div class="pkg-period">contact for pricing</div>
-      <ul class="pkg-features">
-        <li>Everything in Professional</li>
-        <li>Pan-genome analysis</li>
-        <li>Dedicated collaboration</li>
-        <li>Co-authorship options</li>
-        <li>Unlimited revisions</li>
-        <li>Priority support</li>
-      </ul>
-      <a href="#network" class="pkg-btn">Contact Me</a>
-    </div>
-  </div>
-</section>
-
-<!-- NETWORK -->
-<section id="network">
-  <div class="network-layout reveal">
-    <div>
-      <div class="section-tag">Scientific Community</div>
-      <h2 class="section-title">Global <em>Network</em></h2>
-      <div class="divider"></div>
-      <div class="network-text">
-        <p>Actively collaborating with leading genomics laboratories and institutions worldwide. Passionate about open science, data sharing, and building bridges across the global genomics community.</p>
-        <p>Reach out to discuss collaborations, co-authorships, or simply to connect with fellow genomics enthusiasts.</p>
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <h2 class="section-title">Education</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="year">2019 – Present</div>
+        <h3>PhD in Biophysics (Bioinformatics)</h3>
+        <p>Tarbiat Modares University, Tehran, Iran</p>
       </div>
-
-      <div class="connect-form">
-        <div class="form-field">
-          <label>Your Name</label>
-          <input type="text" placeholder="Dr. Jane Smith">
-        </div>
-        <div class="form-field">
-          <label>Institution / Affiliation</label>
-          <input type="text" placeholder="MIT, Broad Institute...">
-        </div>
-        <div class="form-field">
-          <label>Email</label>
-          <input type="email" placeholder="you@university.edu">
-        </div>
-        <div class="form-field">
-          <label>Message</label>
-          <textarea rows="3" placeholder="I'd like to collaborate on..."></textarea>
-        </div>
-        <a href="#" class="btn-primary" style="text-align:center">Send Message</a>
+      <div class="timeline-item">
+        <div class="year">Teaching Experience</div>
+        <h3>Independent Instructor</h3>
+        <p>Python for Genomics & Bioinformatics — 2017 to Present</p>
       </div>
-    </div>
-
-    <div>
-      <div class="section-tag" style="margin-bottom:1rem">Collaborators</div>
-      <div class="scientist-grid">
-        <div class="scientist-card">
-          <div class="sci-name">Dr. [Collaborator]</div>
-          <div class="sci-role">Genome Assembly</div>
-          <div class="sci-inst">Broad Institute, MIT</div>
-        </div>
-        <div class="scientist-card">
-          <div class="sci-name">Dr. [Collaborator]</div>
-          <div class="sci-role">Transcriptomics</div>
-          <div class="sci-inst">Wellcome Sanger</div>
-        </div>
-        <div class="scientist-card">
-          <div class="sci-name">Dr. [Collaborator]</div>
-          <div class="sci-role">Metagenomics</div>
-          <div class="sci-inst">EMBL-EBI</div>
-        </div>
-        <div class="scientist-card">
-          <div class="sci-name">Dr. [Collaborator]</div>
-          <div class="sci-role">Comparative Genomics</div>
-          <div class="sci-inst">UC Berkeley</div>
-        </div>
-        <div class="scientist-card">
-          <div class="sci-name">Dr. [Collaborator]</div>
-          <div class="sci-role">Population Genomics</div>
-          <div class="sci-inst">Max Planck Institute</div>
-        </div>
-        <div class="scientist-card">
-          <div class="sci-name">Dr. [Collaborator]</div>
-          <div class="sci-role">Functional Annotation</div>
-          <div class="sci-inst">NCBI / NIH</div>
-        </div>
+      <div class="timeline-item">
+        <div class="year">2022 – 2023</div>
+        <h3>Course Designer & Instructor</h3>
+        <p>Tarbiat Modares Science & Technology Park, Tehran</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+
+
+  <style>
+    /* COURSES */
+    #courses { background: var(--bg); }
+    .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .course-card {
+      background: var(--bg3); border-radius: 12px; padding: 1.5rem;
+      border: 1px solid rgba(0,180,166,0.15);
+      display: flex; flex-direction: column; gap: 0.8rem;
+    }
+    .course-card h3 { color: #fff; font-size: 1rem; }
+    .course-card p { color: #8ab0aa; font-size: 0.88rem; flex: 1; }
+    .course-card .price { color: var(--teal); font-weight: 700; font-size: 1.1rem; }
+    .btn-enroll {
+      display: inline-block; padding: 0.6rem 1.4rem;
+      background: transparent; border: 1px solid var(--teal);
+      color: var(--teal); border-radius: 25px; cursor: pointer;
+      font-size: 0.88rem; transition: all 0.3s; text-align: center;
+    }
+    .btn-enroll:hover { background: var(--teal); color: #000; }
+
+    /* ANNOTATIONS */
+    #annotations { background: var(--bg2); }
+    .anno-list { display: flex; flex-direction: column; gap: 1rem; }
+    .anno-item {
+      background: var(--bg3); border-radius: 10px; padding: 1.2rem 1.5rem;
+      border: 1px solid rgba(0,180,166,0.15);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .anno-item h3 { color: #fff; font-size: 0.95rem; }
+    .anno-item p { color: var(--muted); font-size: 0.85rem; }
+    .btn-download {
+      padding: 0.5rem 1.2rem; background: var(--teal-dark);
+      color: #fff; border-radius: 20px; text-decoration: none;
+      font-size: 0.85rem; transition: background 0.3s; white-space: nowrap;
+    }
+    .btn-download:hover { background: var(--teal); }
+
+    /* CONTACT */
+    #contact { background: var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+    .contact-card {
+      background: var(--bg3); border-radius: 12px; padding: 1.2rem 1.5rem;
+      border: 1px solid rgba(0,180,166,0.15);
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .contact-card .icon { font-size: 1.5rem; }
+    .contact-card a { color: var(--teal-light); text-decoration: none; font-size: 0.9rem; }
+    .contact-card a:hover { text-decoration: underline; }
+    .contact-card p { color: var(--muted); font-size: 0.85rem; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: 0.85rem;
+      border-top: 1px solid rgba(0,180,166,0.1);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7); z-index: 200;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg2); border: 1px solid var(--teal);
+      border-radius: 16px; padding: 2rem; max-width: 420px; width: 90%;
+      text-align: center;
+    }
+    .modal h3 { color: var(--teal); margin-bottom: 1rem; }
+    .modal p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .modal-close {
+      padding: 0.6rem 1.5rem; background: var(--teal);
+      color: #000; border: none; border-radius: 20px;
+      cursor: pointer; font-weight: 600;
+    }
+
+    @media (max-width: 700px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="section-inner">
+    <h2 class="section-title">Courses</h2>
+    <div class="courses-grid">
+      <div class="course-card">
+        <h3>🐍 Python for Genomics — Beginner</h3>
+        <p>Introduction to Python programming with a focus on biological data: sequences, FASTA parsing, and basic statistics.</p>
+        <div class="price">Contact for pricing</div>
+        <button class="btn-enroll" onclick="openModal('Python for Genomics — Beginner')">Enroll Now</button>
+      </div>
+      <div class="course-card">
+        <h3>🧬 Python for Genomics — Advanced</h3>
+        <p>NGS pipeline automation, RepeatMasker integration, genome-wide analysis, and visualization with Python.</p>
+        <div class="price">Contact for pricing</div>
+        <button class="btn-enroll" onclick="openModal('Python for Genomics — Advanced')">Enroll Now</button>
+      </div>
+      <div class="course-card">
+        <h3>📊 Bioinformatics with R</h3>
+        <p>Statistical genomics, differential expression analysis, and publication-quality visualization using R/Bioconductor.</p>
+        <div class="price">Contact for pricing</div>
+        <button class="btn-enroll" onclick="openModal('Bioinformatics with R')">Enroll Now</button>
+      </div></div>
+  </div>
+</section>
+
+<div class="dna-divider">— C G A T C G A T —</div>
+
+<!-- ANNOTATIONS -->
+<section id="annotations">
+  <div class="section-inner">
+    <h2 class="section-title">Annotation Files</h2>
+    <div class="anno-list">
+      <div class="anno-item">
+        <div>
+          <h3>Repeat Element Annotations — Human Genome</h3>
+          <p>RepeatMasker-based repeat profiling · GFF3 format</p>
+        </div><a href="#" class="btn-download">⬇ Download</a>
+      </div>
+      <div class="anno-item">
+        <div>
+          <h3>Chargaff Parity Analysis — Multi-kingdom Dataset</h3>
+          <p>Strand-specific nucleotide frequency tables · CSV format</p>
+        </div>
+        <a href="#" class="btn-download">⬇ Download</a>
+      </div>
+      <div class="anno-item">
+        <div>
+          <h3>FMDV Genome Annotation</h3>
+          <p>Structural and functional annotation for vaccine design · GenBank format</p>
+        </div>
+        <a href="#" class="btn-download">⬇ Download</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="dna-divider">— A T C G A T C G —</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="icon">📧</div>
+        <div><p>Email</p><a href="mailto:reza.sotoudeh.van@gmail.com">reza.sotoudeh.van@gmail.com</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📱</div>
+        <div><p>Phone</p><a href="tel:+989148105887">+98 914 810 5887</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">💼</div>
+        <div><p>LinkedIn</p><a href="https://linkedin.com/in/reza-sotoudeh-9b10aa130" target="_blank">reza-sotoudeh</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">🐙</div>
+        <div><p>GitHub</p><a href="https://github.com/soken2022" target="_blank">soken2022</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📍</div>
+        <div><p>Location</p><p>Tehran, Iran</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="footer-logo">Dr. <span>[Your Name]</span> — Genomics</div>
-  <ul class="footer-links">
-    <li><a href="#">Google Scholar</a></li>
-    <li><a href="#">ORCID</a></li>
-    <li><a href="#">ResearchGate</a></li>
-    <li><a href="#">GitHub</a></li>
-    <li><a href="#">LinkedIn</a></li>
-  </ul>
-  <div class="footer-copy">© 2026 · All rights reserved</div>
+  <p>🧬 Dr. Reza Sotoudeh · Bioinformatics & Biophysics · Tehran, Iran</p>
+  <p style="margin-top:0.4rem; font-size:0.8rem;">Built with science & code</p>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>🎓 Course Enrollment</h3>
+    <p id="modal-text">To enroll, please contact via email or phone. Payment details will be provided upon registration.</p>
+    <p style="margin-top:0.5rem;"><a href="mailto:reza.sotoudeh.van@gmail.com" style="color:var(--teal)">reza.sotoudeh.van@gmail.com</a></p>
+    <br/>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
 <script>
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        // Stagger children
-        e.target.querySelectorAll('.research-card, .pkg-card, .scientist-card').forEach((c, i) => {
-          c.style.transitionDelay = `${i * 0.1}s`;
-          c.classList.add('visible');
-        });
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Smooth active nav
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
-    });
+  function openModal(course) {
+    document.getElementById('modal-text').textContent =
+      `To enroll in "${course}", please contact via email or phone. Payment details will be provided upon registration.`;
+    document.getElementById('modal').classList.add('active');
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
   });
 </script>
+
 </body>
 </html>
+
