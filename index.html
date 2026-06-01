@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. [Your Name] — Genomics Scientist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e1117;
+    --paper: #f6f3ee;
+    --cream: #ede9e0;
+    --gold: #b8965a;
+    --gold-light: #d4b07a;
+    --sage: #4a6358;
+    --sage-light: #6b8f7e;
+    --muted: #6b6459;
+    --rule: rgba(184,150,90,0.25);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(246,243,238,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 4rem 6rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: var(--sage);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
+
+  .btn-outline {
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--sage);
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--sage);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: var(--sage); color: var(--paper); transform: translateY(-2px); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* DNA Helix SVG animation */
+  .dna-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.5s forwards;
+  }
+
+  .dna-bg {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,99,88,0.08) 0%, transparent 70%);
+  }
+
+  .dna-svg { width: 220px; animation: float 6s ease-in-out infinite; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .stat {
+    text-align: right;
+    border-right: 2px solid var(--gold);
+    padding-right: 1rem;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 7rem 4rem; }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--sage); }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT / EDUCATION ── */
+  #education {
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #education::before {
+    content: 'GENOMICS';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: var(--serif);
+    font-size: 8rem;
+    font-weight: 300;
+    color: rgba(184,150,90,0.06);
+    letter-spacing: 0.3em;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    align-items: start;
+    max-width: 1100px;
+  }
+
+  .edu-text p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+  }
+
+  .timeline { position: relative; padding-left: 1.5rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .timeline-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.75rem;
+    top: 0.4rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--paper);
+  }
+
+  .timeline-year {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-degree {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-inst {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── RESEARCH ── */
+  #research { background: var(--paper); }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .research-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 2.2rem;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+
+  .research-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--sage));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .research-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(14,17,23,0.08); }
+  .research-card:hover::before { transform: scaleX(1); }
+
+  .card-icon {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card-icon::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 0.9rem;
+  }
+
+  .card-text {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .card-year {
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--sage-light);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── ANNOTATION / ANALYSIS ── */
+  #analysis {
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #analysis::after {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,99,88,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #analysis .section-tag { color: var(--gold-light); }
+  #analysis .section-title { color: var(--paper); }
+  #analysis .divider { background: var(--gold-light); }
+
+  .analysis-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .analysis-text p {
+    font-size: 0.92rem;
+    color: rgba(246,243,238,0.65);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .feature-list {
+    list-style: none;
+    margin-top: 1.5rem;
+  }
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(184,150,90,0.15);
+    font-size: 0.88rem;
+    color: rgba(246,243,238,0.7);
+  }
+  .feature-list li::before {
+    content: '→';
+    color: var(--gold-light);
+    font-family: var(--mono);
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  .terminal {
+    background: #0a0d12;
+    border: 1px solid rgba(184,150,90,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+  }
+
+  .terminal-header {
+    background: rgba(184,150,90,0.1);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(184,150,90,0.15);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #e06c75; }
+  .dot-y { background: #e5c07b; }
+  .dot-g { background: #98c379; }
+
+  .terminal-title {
+    margin-left: 0.5rem;
+    font-size: 0.65rem;
+    color: rgba(246,243,238,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    line-height: 2;
+  }
+
+  .t-prompt { color: var(--sage-light); }
+  .t-cmd { color: var(--paper); }
+  .t-out { color: rgba(246,243,238,0.45); }
+  .t-green { color: #98c379; }
+  .t-gold { color: var(--gold-light); }
+  .t-blue { color: #61afef; }
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--gold-light);
+    vertical-align: text-bottom;
+    animation: blink 1.1s step-end infinite;
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* ── PACKAGES ── */
+  #packages { background: var(--cream); }
+
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .pkg-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .pkg-card.featured {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: var(--paper);
+    transform: scale(1.03);
+  }
+
+  .pkg-card:hover:not(.featured) { border-color: var(--gold); transform: translateY(-4px); }
+
+  .pkg-badge {
+    position: absolute;
+    top: -1px;
+    right: 1.5rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .pkg-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .pkg-card.featured .pkg-name { color: var(--paper); }
+
+  .pkg-subtitle {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .pkg-card.featured .pkg-subtitle { color: rgba(246,243,238,0.6); }
+
+  .pkg-price {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .pkg-card.featured .pkg-price { color: var(--paper); }
+
+  .pkg-period {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .pkg-card.featured .pkg-period { color: rgba(246,243,238,0.55); }
+
+  .pkg-features {
+    list-style: none;
+    flex: 1;
+    margin-bottom: 2rem;
+  }
+  .pkg-features li {
+    padding: 0.5rem 0;
+    font-size: 0.84rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 0.6rem;
+  }
+  .pkg-card.featured .pkg-features li { color: rgba(246,243,238,0.75); border-color: rgba(246,243,238,0.1); }
+  .pkg-features li::before { content: '✓'; color: var(--sage); font-weight: bold; }
+  .pkg-card.featured .pkg-features li::before { color: var(--gold-light); }
+
+  .pkg-btn {
+    display: block;
+    text-align: center;
+    padding: 0.85rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--sage);
+    color: var(--sage);
+    transition: all 0.3s;
+  }
+  .pkg-btn:hover { background: var(--sage); color: var(--paper); }
+  .pkg-card.featured .pkg-btn {
+    background: var(--paper);
+    color: var(--sage);
+    border-color: var(--paper);
+  }
+  .pkg-card.featured .pkg-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+
+  /* ── NETWORK ── */
+  #network { background: var(--paper); }
+
+  .network-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .network-text p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+  }
+
+  .scientist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .scientist-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 1.2rem;
+    transition: all 0.3s;
+  }
+  .scientist-card:hover { border-color: var(--gold); }
+
+  .sci-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .sci-role {
+    font-size: 0.72rem;
+    color: var(--gold);
+    font-family: var(--mono);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+  }
+
+  .sci-inst {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .connect-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .form-field label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-field input,
+  .form-field textarea {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 0.75rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus { border-color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(184,150,90,0.2);
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
+  .footer-logo span { color: var(--gold); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(246,243,238,0.4);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: rgba(246,243,238,0.25);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 2rem 4rem; }
+    .hero-stats { position: static; margin-top: 2rem; flex-direction: row; }
+    section { padding: 5rem 2rem; }
+    .edu-grid, .analysis-layout, .network-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .research-grid, .packages-grid { grid-template-columns: 1fr; }
+    .pkg-card.featured { transform: none; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#hero" class="nav-logo">Dr. <span>[Your Name]</span></a>
+  <ul class="nav-links">
+    <li><a href="#education">Education</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#analysis">Analysis</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#network">Network</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Genomics Scientist &amp; Researcher</div>
+    <h1 class="hero-name">Dr. <em>[Your Name]</em></h1>
+    <div class="hero-title">Genome Annotation &amp; Bioinformatics</div>
+    <p class="hero-desc">
+      Advancing the frontiers of genomics through rigorous research, 
+      computational analysis, and genome annotation. Bridging the gap between 
+      raw sequence data and biological insight.
+    </p>
+    <div class="hero-cta">
+      <a href="#research" class="btn-primary">View Research</a>
+      <a href="#packages" class="btn-outline">Explore Packages</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="dna-container">
+      <div class="dna-bg"></div>
+      <!-- Animated DNA SVG -->
+      <svg class="dna-svg" viewBox="0 0 120 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style>
+            .strand1 { stroke: #b8965a; stroke-width: 2; fill: none; }
+            .strand2 { stroke: #4a6358; stroke-width: 2; fill: none; }
+            .rung    { stroke: rgba(184,150,90,0.35); stroke-width: 1.5; }
+            .node1   { fill: #b8965a; }
+            .node2   { fill: #4a6358; }
+          </style>
+          <animateTransform id="rot" attributeType="XML" attributeName="transform" type="rotate" from="0 60 200" to="360 60 200" dur="20s" repeatCount="indefinite"/>
+        </defs>
+        <!-- Strand 1 (sine wave) -->
+        <path class="strand1" d="
+          M 60 0
+          C 90 20, 90 40, 60 60
+          C 30 80, 30 100, 60 120
+          C 90 140, 90 160, 60 180
+          C 30 200, 30 220, 60 240
+          C 90 260, 90 280, 60 300
+          C 30 320, 30 340, 60 360
+          C 90 380, 90 400, 60 400
+        "/>
+        <!-- Strand 2 (opposite sine wave) -->
+        <path class="strand2" d="
+          M 60 0
+          C 30 20, 30 40, 60 60
+          C 90 80, 90 100, 60 120
+          C 30 140, 30 160, 60 180
+          C 90 200, 90 220, 60 240
+          C 30 260, 30 280, 60 300
+          C 90 320, 90 340, 60 360
+          C 30 380, 30 400, 60 400
+        "/>
+        <!-- Rungs -->
+        <line class="rung" x1="60" y1="30" x2="60" y2="30"/>
+        <line class="rung" x1="38" y1="60" x2="82" y2="60"/>
+        <line class="rung" x1="34" y1="90" x2="86" y2="90"/>
+        <line class="rung" x1="38" y1="120" x2="82" y2="120"/>
+        <line class="rung" x1="60" y1="150" x2="60" y2="150"/>
+        <line class="rung" x1="82" y1="180" x2="38" y2="180"/>
+        <line class="rung" x1="86" y1="210" x2="34" y2="210"/>
+        <line class="rung" x1="82" y1="240" x2="38" y2="240"/>
+        <line class="rung" x1="60" y1="270" x2="60" y2="270"/>
+        <line class="rung" x1="38" y1="300" x2="82" y2="300"/>
+        <line class="rung" x1="34" y1="330" x2="86" y2="330"/>
+        <line class="rung" x1="38" y1="360" x2="82" y2="360"/>
+        <!-- Nodes strand 1 -->
+        <circle class="node1" cx="90" cy="30" r="4"/>
+        <circle class="node1" cx="82" cy="90" r="4"/>
+        <circle class="node1" cx="30" cy="150" r="4"/>
+        <circle class="node1" cx="38" cy="210" r="4"/>
+        <circle class="node1" cx="90" cy="270" r="4"/>
+        <circle class="node1" cx="82" cy="330" r="4"/>
+        <!-- Nodes strand 2 -->
+        <circle class="node2" cx="30" cy="30" r="4"/>
+        <circle class="node2" cx="38" cy="90" r="4"/>
+        <circle class="node2" cx="90" cy="150" r="4"/>
+        <circle class="node2" cx="82" cy="210" r="4"/>
+        <circle class="node2" cx="30" cy="270" r="4"/>
+        <circle class="node2" cx="38" cy="330" r="4"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Years Research</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">34</div>
+      <div class="stat-label">Publications</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8K+</div>
+      <div class="stat-label">Genomes Annotated</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="edu-grid reveal">
+    <div>
+      <div class="section-tag">Background</div>
+      <h2 class="section-title">Education &amp; <em>Expertise</em></h2>
+      <div class="divider"></div>
+      <div class="edu-text">
+        <p>A rigorous academic foundation in molecular biology, bioinformatics, and computational genomics, combined with over a decade of hands-on research experience in genome annotation and analysis pipelines.</p>
+        <p>Specialized training in next-generation sequencing technologies, comparative genomics, and functional annotation of eukaryotic and prokaryotic genomes.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">20XX – Present</div>
+        <div class="timeline-degree">Postdoctoral Researcher</div>
+        <div class="timeline-inst">[Your Institution] — Genomics &amp; Bioinformatics Lab</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">20XX – 20XX</div>
+        <div class="timeline-degree">Ph.D. — Computational Genomics</div>
+        <div class="timeline-inst">[Your University] — Department of Molecular Biology</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">20XX – 20XX</div>
+        <div class="timeline-degree">M.Sc. — Bioinformatics</div>
+        <div class="timeline-inst">[Your University]</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">20XX – 20XX</div>
+        <div class="timeline-degree">B.Sc. — Molecular Biology &amp; Genetics</div>
+        <div class="timeline-inst">[Your University]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="reveal">
+    <div class="section-tag">Publications &amp; Work</div>
+    <h2 class="section-title">Latest <em>Research</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="research-grid">
+    <div class="research-card reveal">
+      <div class="card-icon">Genomics</div>
+      <h3 class="card-title">Automated Genome Annotation of Novel Eukaryotic Species</h3>
+      <p class="card-text">A comprehensive pipeline for high-throughput structural and functional genome annotation, integrating ab initio prediction with homology-based evidence.</p>
+      <div class="card-year">Journal of Computational Biology · 2024</div>
+    </div>
+    <div class="research-card reveal">
+      <div class="card-icon">Comparative</div>
+      <h3 class="card-title">Pan-Genome Analysis Reveals Adaptive Gene Clusters in Extremophiles</h3>
+      <p class="card-text">Comparative pan-genomic study identifying conserved and variable gene pools across 47 extremophile strains using k-mer clustering approaches.</p>
+      <div class="card-year">Nature Genomics · 2023</div>
+    </div>
+    <div class="research-card reveal">
+      <div class="card-icon">Transcriptomics</div>
+      <h3 class="card-title">Long-read Sequencing for Isoform-resolved Transcriptome Assembly</h3>
+      <p class="card-text">Leveraging Oxford Nanopore and PacBio data to resolve complex alternative splicing events and produce annotation-grade transcript models.</p>
+      <div class="card-year">Genome Research · 2023</div>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYSIS / ANNOTATION -->
+<section id="analysis">
+  <div class="analysis-layout reveal">
+    <div class="analysis-text">
+      <div class="section-tag">Tools &amp; Methods</div>
+      <h2 class="section-title">Genome <em>Analysis</em> &amp; Annotation</h2>
+      <div class="divider"></div>
+      <p>Offering end-to-end genomic analysis services, from raw sequencing data to fully annotated, publication-ready genome assemblies. Built on reproducible, containerized workflows.</p>
+      <ul class="feature-list">
+        <li>Structural genome annotation (gene models, repeat elements, ncRNA)</li>
+        <li>Functional annotation with GO terms, KEGG, and InterPro</li>
+        <li>Comparative genomics and synteny analysis</li>
+        <li>Variant calling and population genomics</li>
+        <li>Custom bioinformatics pipeline development (Snakemake / Nextflow)</li>
+        <li>Quality assessment and BUSCO completeness scoring</li>
+      </ul>
+    </div>
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="terminal-title">genome_annotation.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">$ </span><span class="t-cmd">run_pipeline --genome assembly.fa</span></div>
+        <div class="t-out">&nbsp;</div>
+        <div><span class="t-green">✔ RepeatMasker</span> <span class="t-out">complete [2.3 GB masked]</span></div>
+        <div><span class="t-green">✔ AUGUSTUS</span> <span class="t-out">ab initio prediction done</span></div>
+        <div><span class="t-green">✔ MAKER2</span> <span class="t-out">evidence-based annotation</span></div>
+        <div class="t-out">&nbsp;</div>
+        <div><span class="t-gold">→ Gene models predicted:</span> <span class="t-blue">24,817</span></div>
+        <div><span class="t-gold">→ BUSCO completeness:</span> <span class="t-blue">97.4%</span></div>
+        <div><span class="t-gold">→ Functional annotations:</span> <span class="t-blue">89.2%</span></div>
+        <div class="t-out">&nbsp;</div>
+        <div><span class="t-green">✔ Output:</span> <span class="t-out">genome_annotated.gff3</span></div>
+        <div><span class="t-prompt">$ </span><span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="reveal">
+    <div class="section-tag">Services</div>
+    <h2 class="section-title">Analysis <em>Packages</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="packages-grid">
+    <div class="pkg-card reveal">
+      <div class="pkg-name">Starter</div>
+      <div class="pkg-subtitle">Basic Annotation</div>
+      <div class="pkg-price">$499</div>
+      <div class="pkg-period">per genome</div>
+      <ul class="pkg-features">
+        <li>Structural annotation</li>
+        <li>Repeat masking</li>
+        <li>BUSCO assessment</li>
+        <li>GFF3 output file</li>
+        <li>1 revision round</li>
+      </ul>
+      <a href="#network" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg-card featured reveal">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-name">Professional</div>
+      <div class="pkg-subtitle">Full Annotation Suite</div>
+      <div class="pkg-price">$1,299</div>
+      <div class="pkg-period">per genome</div>
+      <ul class="pkg-features">
+        <li>Structural + functional annotation</li>
+        <li>GO, KEGG, InterPro mapping</li>
+        <li>Comparative genomics report</li>
+        <li>Custom pipeline setup</li>
+        <li>3 revision rounds</li>
+        <li>Publication-ready figures</li>
+      </ul>
+      <a href="#network" class="pkg-btn">Get Started</a>
+    </div>
+
+    <div class="pkg-card reveal">
+      <div class="pkg-name">Enterprise</div>
+      <div class="pkg-subtitle">Custom Research</div>
+      <div class="pkg-price">Custom</div>
+      <div class="pkg-period">contact for pricing</div>
+      <ul class="pkg-features">
+        <li>Everything in Professional</li>
+        <li>Pan-genome analysis</li>
+        <li>Dedicated collaboration</li>
+        <li>Co-authorship options</li>
+        <li>Unlimited revisions</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#network" class="pkg-btn">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- NETWORK -->
+<section id="network">
+  <div class="network-layout reveal">
+    <div>
+      <div class="section-tag">Scientific Community</div>
+      <h2 class="section-title">Global <em>Network</em></h2>
+      <div class="divider"></div>
+      <div class="network-text">
+        <p>Actively collaborating with leading genomics laboratories and institutions worldwide. Passionate about open science, data sharing, and building bridges across the global genomics community.</p>
+        <p>Reach out to discuss collaborations, co-authorships, or simply to connect with fellow genomics enthusiasts.</p>
+      </div>
+
+      <div class="connect-form">
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" placeholder="Dr. Jane Smith">
+        </div>
+        <div class="form-field">
+          <label>Institution / Affiliation</label>
+          <input type="text" placeholder="MIT, Broad Institute...">
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="you@university.edu">
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea rows="3" placeholder="I'd like to collaborate on..."></textarea>
+        </div>
+        <a href="#" class="btn-primary" style="text-align:center">Send Message</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-tag" style="margin-bottom:1rem">Collaborators</div>
+      <div class="scientist-grid">
+        <div class="scientist-card">
+          <div class="sci-name">Dr. [Collaborator]</div>
+          <div class="sci-role">Genome Assembly</div>
+          <div class="sci-inst">Broad Institute, MIT</div>
+        </div>
+        <div class="scientist-card">
+          <div class="sci-name">Dr. [Collaborator]</div>
+          <div class="sci-role">Transcriptomics</div>
+          <div class="sci-inst">Wellcome Sanger</div>
+        </div>
+        <div class="scientist-card">
+          <div class="sci-name">Dr. [Collaborator]</div>
+          <div class="sci-role">Metagenomics</div>
+          <div class="sci-inst">EMBL-EBI</div>
+        </div>
+        <div class="scientist-card">
+          <div class="sci-name">Dr. [Collaborator]</div>
+          <div class="sci-role">Comparative Genomics</div>
+          <div class="sci-inst">UC Berkeley</div>
+        </div>
+        <div class="scientist-card">
+          <div class="sci-name">Dr. [Collaborator]</div>
+          <div class="sci-role">Population Genomics</div>
+          <div class="sci-inst">Max Planck Institute</div>
+        </div>
+        <div class="scientist-card">
+          <div class="sci-name">Dr. [Collaborator]</div>
+          <div class="sci-role">Functional Annotation</div>
+          <div class="sci-inst">NCBI / NIH</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Dr. <span>[Your Name]</span> — Genomics</div>
+  <ul class="footer-links">
+    <li><a href="#">Google Scholar</a></li>
+    <li><a href="#">ORCID</a></li>
+    <li><a href="#">ResearchGate</a></li>
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">LinkedIn</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 · All rights reserved</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Stagger children
+        e.target.querySelectorAll('.research-card, .pkg-card, .scientist-card').forEach((c, i) => {
+          c.style.transitionDelay = `${i * 0.1}s`;
+          c.classList.add('visible');
+        });
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
